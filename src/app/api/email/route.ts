@@ -13,6 +13,11 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(req: Request) {
   const { name, email, feedback } = await req.json();
+  if (!name || !email || !feedback) {
+    return NextResponse.json({
+      message: `Campos requeridos vacíos!`,
+    });
+  }
   const info = await transporter.sendMail({
     from: `"${process.env.SMTP_NAME}" <${process.env.SMTP_USER}>`, // sender address
     to: `${email}, ${process.env.SMTP_USER}`, // list of receivers
