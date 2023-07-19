@@ -35,6 +35,7 @@ export async function POST(req: Request) {
   } else {
     return NextResponse.json({
       message: `Error al enviar el email!`,
+      ...info,
     });
   }
 }
